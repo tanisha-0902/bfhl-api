@@ -6,6 +6,9 @@ import bfhl_api.service.BfhlService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/bfhl")
 @CrossOrigin(origins = "*") // Allows your front-end or testing tools to connect with no CORS issues
@@ -32,5 +35,13 @@ public class BfhlController {
             errorResponse.setSuccess(false);
             return ResponseEntity.status(500).body(errorResponse); // Exception handling
         }
+    }
+
+    @GetMapping("/health")
+    public ResponseEntity<Map<String, String>> getHealthStatus() {
+        Map<String, String> healthResponse = new LinkedHashMap<>();
+        healthResponse.put("status", "UP");
+        healthResponse.put("user_id", "Tanisha_2310992383");
+        return ResponseEntity.ok(healthResponse);
     }
 }
